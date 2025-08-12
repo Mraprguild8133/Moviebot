@@ -14,6 +14,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from config import Config
 from handlers.bot_handlers import BotHandlers
 
+# In the MovieBot class initialization:
+self.bot_handlers = BotHandlers(self.config)
+
 # Configure logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
