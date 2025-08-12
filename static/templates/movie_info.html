@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Information Template</title>
+    <style>
+        /* CSS template for movie information display (for future web interface) */
+        .movie-card {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .movie-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .movie-poster {
+            width: 150px;
+            height: 225px;
+            border-radius: 8px;
+            margin-right: 20px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-info {
+            flex: 1;
+        }
+        
+        .movie-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .movie-overview {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .movie-cast {
+            margin-bottom: 15px;
+        }
+        
+        .cast-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .rating-star {
+            color: #ffd700;
+            font-size: 20px;
+        }
+        
+        .rating-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .trailer-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        
+        .trailer-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .trailer-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .trailer-link:hover {
+            background: #cc0000;
+        }
+        
+        .external-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .external-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .external-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .genre-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .genre-tag {
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .movie-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .movie-poster {
+                margin: 0 auto 20px auto;
+            }
+            
+            .movie-title {
+                font-size: 24px;
+            }
+            
+            .movie-metadata {
+                justify-content: center;
+            }
+        }
+        
+        /* Animation for loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Error state styling */
+        .error-message {
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Success state styling */
+        .success-message {
+            background: #44ff44;
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Template for movie information display -->
+    <!-- This template can be used for future web interface integration -->
+    
+    <div class="movie-card fade-in">
+        <div class="movie-header">
+            <img src="{{poster_url}}" alt="{{title}} Poster" class="movie-poster" />
+            <div class="movie-info">
+                <h1 class="movie-title">{{title}}</h1>
+                
+                <div class="movie-metadata">
+                    <div class="metadata-item">
+                        <span>📅</span>
+                        <span>{{release_date}}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span>⏱️</span>
+                        <span>{{runtime}}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span>🌍</span>
+                        <span>{{language}}</span>
+                    </div>
+                </div>
+                
+                <div class="genre-tags">
+                    <!-- Genre tags will be populated dynamically -->
+                    <span class="genre-tag">Action</span>
+                    <span class="genre-tag">Adventure</span>
+                    <span class="genre-tag">Sci-Fi</span>
+                </div>
+                
+                <div class="rating-container">
+                    <span class="rating-star">⭐</span>
+                    <span class="rating-text">{{rating}}/10</span>
+                    <span>({{vote_count}} votes)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="movie-overview">
+            {{overview}}
+        </div>
+        
+        <div class="movie-cast">
+            <div class="cast-title">🎭 Cast & Crew</div>
+            <div>
+                <strong>Director:</strong> {{director}}<br>
+                <strong>Cast:</strong> {{cast}}
+            </div>
+        </div>
+        
+        <div class="trailer-section">
+            <div class="trailer-title">
+                🎬 Trailers
+            </div>
+            <a href="{{trailer_url}}" class="trailer-link" target="_blank">
+                ▶️ Watch Trailer on YouTube
+            </a>
+        </div>
+        
+        <div class="external-links">
+            <a href="{{imdb_url}}" class="external-link" target="_blank">
+                🎭 IMDB
+            </a>
+            <a href="{{tmdb_url}}" class="external-link" target="_blank">
+                🎬 TMDB
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript for future interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive features here
+            console.log('Movie information template loaded');
+            
+            // Example: Add click tracking for external links
+            const externalLinks = document.querySelectorAll('.external-link');
+            externalLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    console.log('External link clicked:', this.href);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
