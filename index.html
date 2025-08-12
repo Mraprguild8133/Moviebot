@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Movie Search Bot</title>
+    <meta name="description" content="A comprehensive Telegram bot for movie discovery through text search, image analysis, and video recognition">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .bot-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .tech-stack {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            color: white;
+        }
+        
+        .tech-stack h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .tech-item h4 {
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        
+        .telegram-btn:hover {
+            background: #006699;
+        }
+        
+        .api-status {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .status-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .status-active {
+            color: #28a745;
+        }
+        
+        .status-optional {
+            color: #ffc107;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Telegram Movie Bot</h1>
+            <p>Discover movies through intelligent search, image recognition, and video analysis</p>
+        </div>
+        
+        <div class="bot-info">
+            <h2>About the Bot</h2>
+            <p>This advanced Telegram bot provides comprehensive movie information through multiple search methods. Whether you're looking for a specific film, have a movie poster image, or a video clip, our bot can help you identify and learn about movies using cutting-edge APIs and machine learning services.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Text Search</h3>
+                <p>Search for movies using titles with comprehensive results from TMDB and OMDB databases. Get detailed information including ratings, cast, plot, and release dates.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🖼️</div>
+                <h3>Image Analysis</h3>
+                <p>Upload movie posters and let our AI analyze them to identify the film. Uses Google Vision API for accurate text recognition and movie identification.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3>Video Recognition</h3>
+                <p>Upload movie clips or trailers to identify the film. Our system analyzes video frames and audio metadata to provide accurate movie identification.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎞️</div>
+                <h3>Trailer Search</h3>
+                <p>Automatically find and share YouTube trailers for any movie. Smart filtering ensures you get official trailers from verified sources.</p>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>Telegram Bot API</h4>
+                    <p>Real-time messaging and file handling</p>
+                </div>
+                <div class="tech-item">
+                    <h4>TMDB API</h4>
+                    <p>Comprehensive movie database</p>
+                </div>
+                <div class="tech-item">
+                    <h4>OMDB API</h4>
+                    <p>Additional movie metadata</p>
+                </div>
+                <div class="tech-item">
+                    <h4>YouTube Data API</h4>
+                    <p>Trailer search and discovery</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Google Vision API</h4>
+                    <p>Image text recognition</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Python & AsyncIO</h4>
+                    <p>High-performance async processing</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-status">
+            <h3>API Integration Status</h3>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-active">✅ Telegram</div>
+                    <small>Active</small>
+                </div>
+                <div class="status-item">
+                    <div class="status-active">✅ TMDB</div>
+                    <small>Active</small>
+                </div>
+                <div class="status-item">
+                    <div class="status-active">✅ OMDB</div>
+                    <small>Active</small>
+                </div>
+                <div class="status-item">
+                    <div class="status-active">✅ YouTube</div>
+                    <small>Active</small>
+                </div>
+                <div class="status-item">
+                    <div class="status-optional">⚠️ Vision API</div>
+                    <small>Requires billing</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>How to Use</h2>
+            <p>Start using the bot by finding it on Telegram and sending any of these commands:</p>
+            <ul style="text-align: left; display: inline-block; margin: 20px 0;">
+                <li><strong>/start</strong> - Welcome message and overview</li>
+                <li><strong>/help</strong> - Detailed help and API status</li>
+                <li><strong>/search Movie Title</strong> - Search for specific movies</li>
+                <li><strong>Send movie title</strong> - Direct text search</li>
+                <li><strong>Upload image</strong> - Analyze movie posters</li>
+                <li><strong>Upload video</strong> - Identify movie clips</li>
+            </ul>
+            <br>
+            <a href="#" class="telegram-btn">📱 Start Using Bot</a>
+        </div>
+        
+        <div class="footer">
+            <p>Built with Python, powered by multiple APIs, designed for movie enthusiasts</p>
+            <p>© 2025 Telegram Movie Search Bot</p>
+        </div>
+    </div>
+</body>
+</html>

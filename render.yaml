@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: telegram-movie-bot
+    env: python
+    plan: free
+    buildCommand: pip install python-telegram-bot==20.7 aiohttp==3.12.15 Pillow==11.3.0
+    startCommand: python main.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TMDB_API_KEY
+        sync: false
+      - key: OMDB_API_KEY
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: GOOGLE_VISION_API_KEY
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: false
