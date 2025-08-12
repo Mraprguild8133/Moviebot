@@ -15,7 +15,7 @@ from config import Config
 from handlers.bot_handlers import BotHandlers
 
 # In the MovieBot class initialization:
-self.bot_handlers = BotHandlers(self.config)
+self.handlers/bot_handlers = BotHandlers(self.config)
 
 # Configure logging
 logging.basicConfig(
